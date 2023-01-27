@@ -1,0 +1,58 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+int main() {
+    int opcion = 1; float fondo = 1000, monto;
+    cout << "BIENVENIDO AL BANCO" << endl <<
+    "Selecciona una opción de operación" << endl <<
+    "1. Depositar dinero" << endl <<
+    "2. Retirar dinero" << endl << 
+    "3. Salir" << endl;
+    
+    // Se valida que la opción a ingresar se encuentre en el rango permitido
+    while (opcion > 0 && opcion < 3) {
+        cout << "\nOpción: "; cin >> opcion;
+        
+        if (opcion > 3) {
+        cout << "Ingrese una opcion válida\n";
+        opcion = 1;
+        } else {
+            switch (opcion) {
+                
+            /* Esta opción permite al usuario guardar su dinero en el banco,
+               la cantidad de dinero se muestra al finalizar la operación */
+                case 1:
+                cout << "Saldo a depositar: "; cin >> monto;
+                monto = round(monto*10)/10;
+                fondo += monto;
+                printf("Saldo disponible: S/%.2f\n", fondo); // Moneda: Sol peruano (S/)
+                break;
+                
+            /* Esta opción permite al usuario retirar dinero del banco,
+               la cantidad de dinero se muestra al finalizar la operación */
+                case 2:
+                cout << "Saldo a retirar: "; cin >> monto;
+                // Se valida que el monto a retirar no supere los fondos permitidos
+                while (fondo < monto) {
+                    cout << "Saldo insuficiente" << endl;
+                    cout << "Saldo a retirar: "; cin >> monto; // Moneda: Sol peruano (S/)
+                }
+                
+                monto = round(monto*10)/10;
+                fondo -= monto;
+                printf("Saldo disponible: S/%.2f\n", fondo); // Moneda: Sol peruano (S/)
+                break;
+            
+            /* Esta opción permite al usuario finalizar la sesión*/
+                case 3:
+                cout << "Gracias por su preferencia" << endl <<
+                "¡Hasta pronto!";
+                break;
+            }
+        }
+    }
+    
+    return 7;
+}
